@@ -1,4 +1,0 @@
-metrics:
-  reporters:
-    - type: log
-      logger: metrics

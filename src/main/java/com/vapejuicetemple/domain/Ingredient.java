@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -16,6 +17,7 @@ import javax.persistence.Entity;
 @Builder
 @Entity
 @Embeddable
+@Table(name = "ingredients")
 public class Ingredient {
     @JsonProperty
     @Column(name = "strength")

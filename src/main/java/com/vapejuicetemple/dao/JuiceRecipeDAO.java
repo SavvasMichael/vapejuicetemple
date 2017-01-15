@@ -14,10 +14,14 @@ public class JuiceRecipeDAO extends AbstractDAO<JuiceRecipe> {
     }
 
     public List<JuiceRecipe> findAll() {
-        return list(namedQuery("com.javaeeeee.dwstart.core.Employee.findAll"));
+        return list(namedQuery("findsAll"));
     }
 
     public Optional<JuiceRecipe> findById(UUID id) {
         return Optional.ofNullable(get(id));
+    }
+
+    public JuiceRecipe saveRecipe(JuiceRecipe juiceRecipe) {
+        return persist(juiceRecipe);
     }
 }

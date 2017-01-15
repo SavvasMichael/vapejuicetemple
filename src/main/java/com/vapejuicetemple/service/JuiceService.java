@@ -20,19 +20,15 @@ public class JuiceService {
         this.juiceRecipeDAO = juiceRecipeDAO;
     }
 
-    public JuiceService() {
-    }
-
-    public List<JuiceRecipe> insertJuiceRecipe(JuiceRecipe juiceRecipe) {
+    public JuiceRecipe insertJuiceRecipe(JuiceRecipe juiceRecipe) {
         if (validateJuiceRecipe(juiceRecipe)) {
-            juiceRecipes.add(juiceRecipe);
-            return juiceRecipes;
+           return juiceRecipeDAO.saveRecipe(juiceRecipe);
         }
         return null;
-    }
-
+}
+    @UnitOfWork
     public List<JuiceRecipe> getJuiceRecipes() {
-        return juiceRecipes;
+        return juiceRecipeDAO.findAll();
     }
 
     @UnitOfWork

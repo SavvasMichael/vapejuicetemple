@@ -6,14 +6,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
-@Table(appliesTo = "juice_recipes")
+@Table(name = "recipe")
+@NamedQueries({@NamedQuery(name = "findsAll", query = "select e from JuiceRecipe e")})
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +21,7 @@ public class JuiceRecipe {
     @JsonProperty
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private int id;
     @JsonProperty
     @Column(name = "name")
     private String name;

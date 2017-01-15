@@ -4,12 +4,10 @@ import com.google.inject.Inject;
 import com.vapejuicetemple.dao.JuiceRecipeDAO;
 import com.vapejuicetemple.domain.JuiceRecipe;
 import com.vapejuicetemple.exception.InvalidJuiceRecipeException;
-import io.dropwizard.hibernate.UnitOfWork;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class JuiceService {
     private List<JuiceRecipe> juiceRecipes = new ArrayList<>();
@@ -26,18 +24,16 @@ public class JuiceService {
         }
         return null;
 }
-    @UnitOfWork
     public List<JuiceRecipe> getJuiceRecipes() {
         return juiceRecipeDAO.findAll();
     }
 
-    @UnitOfWork
-    public Optional<JuiceRecipe> getJuiceRecipeById(UUID id) {
+    public Optional<JuiceRecipe> getJuiceRecipeById(int id) {
         return juiceRecipeDAO.findById(id);
-    }
+}
 
-    public void clearJuiceRecipes() {
-        juiceRecipes.clear();
+    public JuiceRecipe deleteJuiceRecipe(int id) {
+        return juiceRecipeDAO.deleteRecipe(id);
     }
 
     private boolean validateJuiceRecipe(JuiceRecipe juiceRecipe) {
@@ -46,4 +42,5 @@ public class JuiceService {
         }
         return true;
     }
+
 }

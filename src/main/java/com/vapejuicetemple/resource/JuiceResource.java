@@ -40,12 +40,20 @@ public class JuiceResource {
         return Response.ok(juiceService.getJuiceRecipes()).build();
     }
 
+    @GET
+    @Timed
+    @UnitOfWork
+    @Path("/{id}")
+    public Response getJuiceRecipe(@PathParam("id") int id) {
+        return Response.ok(juiceService.getJuiceRecipeById(id)).build();
+    }
+
     @DELETE
     @Timed
     @UnitOfWork
-    public Response clearJuiceRecipes() {
-        juiceService.clearJuiceRecipes();
-        return Response.noContent().build();
+    @Path("/{id}")
+    public Response deleteJuiceRecipe(@PathParam("id") int id) {
+        return Response.ok(juiceService.deleteJuiceRecipe(id)).build();
     }
 
 }

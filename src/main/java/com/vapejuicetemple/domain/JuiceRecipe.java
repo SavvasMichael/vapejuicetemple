@@ -11,8 +11,10 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "recipe")
-@NamedQueries({@NamedQuery(name = "findsAll", query = "select e from JuiceRecipe e")})
+@Table(name = "juice_recipes")
+@SecondaryTable(name="juice_recipes_ingredients", pkJoinColumns=@PrimaryKeyJoinColumn(name="JuiceRecipe_Id"))
+@NamedQueries({@NamedQuery(name = "findsAll", query = "select jr from JuiceRecipe jr"),
+               @NamedQuery(name = "deleteById", query = "delete from JuiceRecipe jr where jr.id = :id")})
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,14 +25,18 @@ public class JuiceRecipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @JsonProperty
-    @Column(name = "name")
     private String name;
     @JsonProperty
-    @Column(name = "description")
     private String description;
     @Wither
     @JsonProperty
     @Embedded
-    @Column(name = "Ingredients")
+    @AttributeOverrides({
+            @AttributeOverride(name="strength", column=@Column(name="strength", table="strength")),
+            @AttributeOverride(name="pg", column=@Column(name="pg", table="pg")),
+            @AttributeOverride(name="vg", column=@Column(name="vg", table="vg")),
+            @AttributeOverride(name="percentage", column=@Column(name="percentage", table="percentage")),
+            @AttributeOverride(name="ml", column=@Column(name="ml", table="ml"))
+    })
     private List<Ingredient> ingredients;
 }

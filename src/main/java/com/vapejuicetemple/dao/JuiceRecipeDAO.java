@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class JuiceRecipeDAO extends AbstractDAO<JuiceRecipe> {
     public JuiceRecipeDAO(SessionFactory sessionFactory) {
@@ -17,11 +16,20 @@ public class JuiceRecipeDAO extends AbstractDAO<JuiceRecipe> {
         return list(namedQuery("findsAll"));
     }
 
-    public Optional<JuiceRecipe> findById(UUID id) {
+    public Optional<JuiceRecipe> findById(int id) {
         return Optional.ofNullable(get(id));
     }
 
     public JuiceRecipe saveRecipe(JuiceRecipe juiceRecipe) {
         return persist(juiceRecipe);
+    }
+
+    public JuiceRecipe deleteRecipe(int id) {
+        Optional<JuiceRecipe> byId = findById(id);
+        if(byId.isPresent()){
+           currentSession().delete(byId.get());
+            return byId.get();
+        }
+        return null;
     }
 }

@@ -12,20 +12,20 @@ public class JuiceRecipeDAO extends AbstractDAO<JuiceRecipe> {
         super(sessionFactory);
     }
 
-    public List<JuiceRecipe> findAll() {
+    public List<JuiceRecipe> getAllJuiceRecipes() {
         return list(namedQuery("findsAll"));
     }
 
-    public Optional<JuiceRecipe> findById(int id) {
+    public Optional<JuiceRecipe> getJuiceRecipeById(int id) {
         return Optional.ofNullable(get(id));
     }
 
-    public JuiceRecipe saveRecipe(JuiceRecipe juiceRecipe) {
+    public JuiceRecipe saveJuiceRecipe(JuiceRecipe juiceRecipe) {
         return persist(juiceRecipe);
     }
 
-    public JuiceRecipe deleteRecipe(int id) {
-        Optional<JuiceRecipe> byId = findById(id);
+    public JuiceRecipe deleteJuiceRecipe(int id) {
+        Optional<JuiceRecipe> byId = getJuiceRecipeById(id);
         if(byId.isPresent()){
            currentSession().delete(byId.get());
             return byId.get();

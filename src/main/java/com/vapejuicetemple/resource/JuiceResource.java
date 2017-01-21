@@ -29,7 +29,7 @@ public class JuiceResource {
     @Timed
     @Consumes(MediaType.APPLICATION_JSON)
     @UnitOfWork
-    public Response submitJuiceRecipe(JuiceRecipe juiceRecipe) {
+    public Response saveJuiceRecipe(JuiceRecipe juiceRecipe) {
         return Response.ok(juiceService.insertJuiceRecipe(juiceRecipe)).build();
     }
 

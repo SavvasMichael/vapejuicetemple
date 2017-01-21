@@ -1,10 +1,7 @@
 package com.vapejuicetemple.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -14,6 +11,8 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 @Builder
 @Embeddable
+@EqualsAndHashCode
+@ToString
 public class Ingredient {
     @JsonProperty
     @Column(name = "strength")

@@ -55,5 +55,4 @@ public class JuiceResource {
     public Response deleteJuiceRecipe(@PathParam("id") int id) {
         return Response.ok(juiceService.deleteJuiceRecipe(id)).build();
     }
-
 }
